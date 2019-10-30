@@ -80,7 +80,7 @@ class UserListAdapter(private val context: Context, private var userList: List<U
             ViewCompat.setTransitionName(avatar, userList[position].userName)
 
             avatar.setOnClickListener {
-                (context as UsersActivity).onUserAvatarClicked(userList[position],it,position)
+                (context as UsersActivity).onUserAvatarClicked(userList[position], it, position)
             }
         }
 

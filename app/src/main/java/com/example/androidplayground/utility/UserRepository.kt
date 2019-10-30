@@ -1,8 +1,8 @@
 package com.example.androidplayground.utility
 
 import android.content.Context
-import com.example.androidplayground.feature.users.repo.UserDao
 import com.example.androidplayground.feature.users.UserData
+import com.example.androidplayground.feature.users.repo.UserDao
 import com.example.androidplayground.feature.users.repo.UserDatabase
 import com.example.androidplayground.utility.network.ApiClient
 import kotlinx.coroutines.Dispatchers

@@ -1,6 +1,5 @@
 package com.example.androidplayground.feature.users
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -105,8 +104,8 @@ class UsersActivity : AppCompatActivity() {
     }
 
 
-    private fun showToast(message:String){
-        Toast.makeText(this,message, Toast.LENGTH_SHORT).show()
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
 }
