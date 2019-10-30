@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -17,8 +18,6 @@ import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailsActivity : AppCompatActivity() {
 
-    private val userData = intent.extras?.getSerializable(Constants.EXTRA_USER_DATA)
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +27,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun loadUserImage() {
+        val userData = intent?.extras?.getSerializable(Constants.EXTRA_USER_DATA)
         Glide.with(this)
             .load((userData as UserData).avatarUrl)
             .placeholder(R.mipmap.ic_place_holder_round)
@@ -57,10 +57,14 @@ class DetailsActivity : AppCompatActivity() {
             }).into(iv_detail_avatar)
     }
 
-    private fun onDeleteButtonClicked(view: View) {
-            if(view is Button){
+    fun onDeleteButtonClicked(view: View) {
+        if (view is Button) {
+            showToast("Sorry, Not Implemented")
+        }
+    }
 
-            }
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
 }

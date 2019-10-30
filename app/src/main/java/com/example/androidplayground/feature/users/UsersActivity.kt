@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
@@ -98,19 +99,14 @@ class UsersActivity : AppCompatActivity() {
     fun onAddButtonClicked(view: View) {
         if (view is FloatingActionButton) {
             view.setOnClickListener {
-
+                showToast("Sorry,Not implemented")
             }
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == Constants.USER_LIST_TO_DETAILS_REQUEST) {
 
-            if (resultCode == Activity.RESULT_OK) {
-
-            }
-        }
+    private fun showToast(message:String){
+        Toast.makeText(this,message, Toast.LENGTH_SHORT).show()
     }
 
 }
