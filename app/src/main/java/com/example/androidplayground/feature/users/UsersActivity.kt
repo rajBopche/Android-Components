@@ -11,7 +11,6 @@ import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.androidplayground.R
-import com.example.androidplayground.feature.UserViewModel
 import com.example.androidplayground.utility.Constants
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar

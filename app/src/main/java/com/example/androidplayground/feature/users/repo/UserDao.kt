@@ -1,5 +1,6 @@
 package com.example.androidplayground.feature.users.repo
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -15,5 +16,5 @@ interface UserDao {
     suspend fun insertAllUsers(userList: List<UserData>)
 
     @Query("SELECT * from user_table")
-    fun getAllUsers(): List<UserData>
+    fun getAllUsers(): LiveData<List<UserData>>
 }

@@ -1,6 +1,7 @@
 package com.example.androidplayground.utility
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import com.example.androidplayground.feature.users.UserData
 import com.example.androidplayground.feature.users.repo.UserDao
 import com.example.androidplayground.feature.users.repo.UserDatabase
@@ -11,7 +12,7 @@ import kotlinx.coroutines.withContext
 class UserRepository(context: Context) {
 
     private var userDao: UserDao
-    private var userList: List<UserData>? = null
+    private var userList: LiveData<List<UserData>>? = null
     private val apiService = ApiClient.getClient()
 
     init {
@@ -23,22 +24,18 @@ class UserRepository(context: Context) {
         userDao.insertUser(user)
     }
 
-    suspend fun insertAllUsers(userList: List<UserData>) {
-        userDao.insertAllUsers(userList)
+    private suspend fun insertAllUsers(userList: List<UserData>?) {
+        if (userList != null && userList.isNotEmpty()) {
+            userDao.insertAllUsers(userList)
+        }
     }
 
-    suspend fun getUserList(): List<UserData> {
-        userList = userDao.getAllUsers()
-        if (userList.isNullOrEmpty()) {
-            userList = apiService.getUserData().body()
-
-            withContext(Dispatchers.IO) {
-                userList?.forEach {
-                    insert(it)
-                }
-            }
+    suspend fun getUserList(): LiveData<List<UserData>> {
+        val userListFromRemote = apiService.getUserData().body()
+        withContext(Dispatchers.IO) {
+            insertAllUsers(userListFromRemote)
         }
-        return userList!!
+        return userDao.getAllUsers()
     }
 
 }
