@@ -23,6 +23,10 @@ class UserRepository(context: Context) {
         userDao.insertUser(user)
     }
 
+    suspend fun insertAllUsers(userList: List<UserData>) {
+        userDao.insertAllUsers(userList)
+    }
+
     suspend fun getUserList(): List<UserData> {
         userList = userDao.getAllUsers()
         if (userList.isNullOrEmpty()) {

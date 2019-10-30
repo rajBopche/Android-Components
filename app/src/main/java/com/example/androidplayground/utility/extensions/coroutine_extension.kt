@@ -1,18 +1,16 @@
 package com.example.androidplayground.utility.extensions
 
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-fun safeLaunch(
-    block: suspend () -> Unit
-) {
+fun CoroutineScope.safeLaunch(job: suspend CoroutineScope.() -> Job, errorCase: () -> Unit) {
 
     try {
-        GlobalScope.launch {
-            block()
+        launch {
+            job()
         }
-    } catch (t: Throwable) {
-        t.printStackTrace()
+    } catch (e: Exception) {
+        errorCase()
     }
-
 }
