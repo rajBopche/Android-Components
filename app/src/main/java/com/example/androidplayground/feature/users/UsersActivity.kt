@@ -103,9 +103,7 @@ class UsersActivity : AppCompatActivity() {
 
     fun onAddButtonClicked(view: View) {
         if (view is FloatingActionButton) {
-            view.setOnClickListener {
-                showToast("Sorry,Not implemented")
-            }
+            showToast("Sorry, Not implemented")
         }
     }
 
