@@ -34,8 +34,8 @@ class UserListAdapter(private val context: Context, private var userList: List<U
         holder.bindData(position)
     }
 
-    fun setListData(userList: List<UserData>) {
-        this.userList = userList
+    fun updateAdapter(modifiedUserList: List<UserData>) {
+        this.userList = modifiedUserList
         notifyDataSetChanged()
     }
 

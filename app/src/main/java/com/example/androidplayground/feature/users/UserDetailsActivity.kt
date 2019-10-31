@@ -1,5 +1,6 @@
 package com.example.androidplayground.feature.users
 
+import android.app.Activity
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
@@ -59,7 +60,9 @@ class DetailsActivity : AppCompatActivity() {
 
     fun onDeleteButtonClicked(view: View) {
         if (view is Button) {
-            showToast("Sorry, Not Implemented")
+            setResult(Activity.RESULT_OK)
+            showToast("User Deleted")
+            finish()
         }
     }
 

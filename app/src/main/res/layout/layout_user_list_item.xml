@@ -6,6 +6,9 @@
         android:layout_width="match_parent"
         app:cardCornerRadius="4dp"
         android:elevation="4dp"
+        android:foreground="@drawable/list_item_ripple_effect"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_margin="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout

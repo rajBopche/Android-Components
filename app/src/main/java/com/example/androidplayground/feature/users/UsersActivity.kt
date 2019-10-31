@@ -1,5 +1,6 @@
 package com.example.androidplayground.feature.users
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -21,6 +22,9 @@ import kotlinx.android.synthetic.main.activity_users.*
 class UsersActivity : AppCompatActivity() {
 
     private lateinit var userViewModel: UserViewModel
+    private var userDataList = ArrayList<UserData>()
+    private var clickedItemPosition: Int = -1
+    private var userAdapter: UserListAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +35,7 @@ class UsersActivity : AppCompatActivity() {
     }
 
     private fun setRecyclerView(userList: List<UserData>) {
-        val userAdapter = UserListAdapter(this, userList)
+        userAdapter = UserListAdapter(this, userList)
         rv_data_list.setHasFixedSize(true)
         rv_data_list.adapter = userAdapter
     }
@@ -40,7 +44,8 @@ class UsersActivity : AppCompatActivity() {
         userViewModel.getData()
         userViewModel.getUserData().observe(this, Observer {
             if (it != null) {
-                setRecyclerView(it)
+                userDataList.addAll(it)
+                setRecyclerView(userDataList)
             }
         })
     }
@@ -78,6 +83,7 @@ class UsersActivity : AppCompatActivity() {
         userAvatarImageView: View,
         position: Int
     ) {
+        clickedItemPosition = position
         val intent = Intent(this, DetailsActivity::class.java).apply {
             putExtra(Constants.EXTRA_USER_DATA, userData)
             putExtra(
@@ -103,6 +109,14 @@ class UsersActivity : AppCompatActivity() {
         }
     }
 
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == Constants.USER_LIST_TO_DETAILS_REQUEST && resultCode == Activity.RESULT_OK) {
+            userDataList.removeAt(clickedItemPosition)
+            userAdapter?.updateAdapter(userDataList)
+        }
+    }
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
