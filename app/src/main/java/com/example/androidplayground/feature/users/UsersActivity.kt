@@ -45,7 +45,11 @@ class UsersActivity : AppCompatActivity() {
         userViewModel.getUserData().observe(this, Observer {
             if (it != null) {
                 userDataList.addAll(it)
-                setRecyclerView(userDataList)
+                if (userAdapter == null) {
+                    setRecyclerView(userDataList)
+                } else {
+                    userAdapter?.updateAdapter(userDataList)
+                }
             }
         })
     }
