@@ -37,7 +37,7 @@ class UsersActivity : AppCompatActivity() {
 
     private fun getData() {
         userViewModel.getData()
-        userViewModel.getUserData().observe(this, Observer {
+        userViewModel.userList?.observe(this, Observer {
             if (it != null) {
                 setRecyclerView(it)
             }
@@ -96,9 +96,7 @@ class UsersActivity : AppCompatActivity() {
 
     fun onAddButtonClicked(view: View) {
         if (view is FloatingActionButton) {
-            view.setOnClickListener {
-                showToast("Sorry,Not implemented")
-            }
+            showToast("Sorry,Not implemented")
         }
     }
 
