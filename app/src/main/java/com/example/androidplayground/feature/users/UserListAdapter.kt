@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.ViewCompat
@@ -83,6 +84,5 @@ class UserListAdapter(private val context: Context, private var userList: List<U
                 (context as UsersActivity).onUserAvatarClicked(userList[position], it, position)
             }
         }
-
     }
 }
