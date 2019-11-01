@@ -1,7 +1,6 @@
 package com.example.androidplayground.utility
 
 import android.content.Context
-import android.service.autofill.UserData
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
@@ -31,7 +30,7 @@ class UserRepository(context: Context) {
         saveCallResult: suspend (A) -> Unit
     ): LiveData<Result<T>> = liveData(Dispatchers.IO) {
         emit(Result.loading())
-        val source = dbQuery().map { userItem -> Result.success(userItem) }
+        val source = dbQuery().map { userItem: T -> Result.success(userItem) }
         emitSource(source)
         val responseStatus = networkCall()
         if (responseStatus.status == Result.Status.SUCCESS)
@@ -48,7 +47,8 @@ class UserRepository(context: Context) {
             val response = apiClient.getUserData()
             if (response.isSuccessful) {
                 val responseBody = response.body()
-                return Result.success(responseBody.get(0))
+                //TODO 1/11/19 : ReCheck this casting
+                return Result.success(responseBody as T)
             }
             Result.error("${response.code()} ${response.message()}")
 
