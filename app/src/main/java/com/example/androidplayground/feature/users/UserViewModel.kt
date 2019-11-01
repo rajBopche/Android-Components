@@ -11,7 +11,7 @@ import com.example.androidplayground.utility.extensions.safeLaunch
 
 class UserViewModel(app: Application) : AndroidViewModel(app) {
 
-    var userList: LiveData<List<UserData>>? = null
+    var userList: LiveData<List<UserData>> = MutableLiveData<List<UserData>>()
     private val userRepository = UserRepository(app)
     private val loadStatus = MutableLiveData<Int>()
 

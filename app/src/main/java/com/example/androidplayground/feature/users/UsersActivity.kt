@@ -37,7 +37,7 @@ class UsersActivity : AppCompatActivity() {
 
     private fun getData() {
         userViewModel.getData()
-        userViewModel.userList?.observe(this, Observer {
+        userViewModel.userList.observe(this, Observer {
             if (it != null) {
                 setRecyclerView(it)
             }
