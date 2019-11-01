@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".feature.users.UsersActivity"/>
-        <activity android:name=".feature.users.DetailsActivity"/>
+        <activity android:name=".feature.users.UserDetailsActivity"/>
 
     </application>
 

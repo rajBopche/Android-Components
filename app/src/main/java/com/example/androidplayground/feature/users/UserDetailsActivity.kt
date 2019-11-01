@@ -15,9 +15,7 @@ import com.example.androidplayground.R
 import com.example.androidplayground.utility.Constants
 import kotlinx.android.synthetic.main.activity_detail.*
 
-
-class DetailsActivity : AppCompatActivity() {
-
+class UserDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +51,6 @@ class DetailsActivity : AppCompatActivity() {
                     supportStartPostponedEnterTransition()
                     return false
                 }
-
             }).into(iv_detail_avatar)
     }
 
@@ -66,5 +63,4 @@ class DetailsActivity : AppCompatActivity() {
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
-
 }

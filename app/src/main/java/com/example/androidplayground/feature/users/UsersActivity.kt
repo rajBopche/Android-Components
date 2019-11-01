@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.androidplayground.R
 import com.example.androidplayground.utility.Constants
@@ -16,10 +15,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_users.*
 
-
 class UsersActivity : AppCompatActivity() {
 
     private lateinit var userViewModel: UserViewModel
+    private var userAdapter: UserListAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,36 +29,15 @@ class UsersActivity : AppCompatActivity() {
     }
 
     private fun setRecyclerView(userList: List<UserData>) {
-        val userAdapter = UserListAdapter(this, userList)
+        userAdapter = UserListAdapter(this, userList)
         rv_data_list.setHasFixedSize(true)
         rv_data_list.adapter = userAdapter
     }
 
     private fun getData() {
-        userViewModel.getData()
-        userViewModel.userList.observe(this, Observer {
-            if (it != null) {
-                setRecyclerView(it)
-            }
-        })
     }
 
-
     private fun getloadingStatus() {
-        userViewModel.getLoadingStatus().observe(this, Observer {
-            when (it) {
-                Constants.STATUS_COMPLETE -> {
-                    pb_progress.visibility = View.GONE
-                }
-                Constants.STATUS_LOADING -> {
-                    pb_progress.visibility = View.VISIBLE
-                }
-                Constants.STATUS_ERROR -> {
-                    pb_progress.visibility = View.GONE
-                    showSnackBar("Oops Something went wrong")
-                }
-            }
-        })
     }
 
     private fun showSnackBar(message: String) {
@@ -67,7 +45,6 @@ class UsersActivity : AppCompatActivity() {
             .make(cl_container, message, Snackbar.LENGTH_INDEFINITE)
             .setTextColor(ContextCompat.getColor(this, R.color.colorDarkRed))
             .setAction("RETRY") {
-                userViewModel.getData()
             }
             .show()
     }
@@ -77,7 +54,7 @@ class UsersActivity : AppCompatActivity() {
         userAvatarImageView: View,
         position: Int
     ) {
-        val intent = Intent(this, DetailsActivity::class.java).apply {
+        val intent = Intent(this, UserDetailsActivity::class.java).apply {
             putExtra(Constants.EXTRA_USER_DATA, userData)
             putExtra(
                 Constants.EXTRA_USER_DATA_IMAGE_TRANSITION_NAME,
@@ -100,9 +77,7 @@ class UsersActivity : AppCompatActivity() {
         }
     }
 
-
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
-
 }

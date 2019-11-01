@@ -2,40 +2,21 @@ package com.example.androidplayground.utility
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import com.example.androidplayground.feature.users.UserData
-import com.example.androidplayground.feature.users.repo.UserDao
-import com.example.androidplayground.feature.users.repo.UserDatabase
-import com.example.androidplayground.utility.network.ApiClient
+import androidx.lifecycle.liveData
+import androidx.lifecycle.map
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class UserRepository(context: Context) {
 
-    private var userDao: UserDao
-    private var userList: LiveData<List<UserData>>? = null
-    private val apiService = ApiClient.getClient()
+    // val userList =
 
-    init {
-        val userDatabase = UserDatabase.getDataBaseInstance(context)
-        userDao = userDatabase.userDao()
+    private fun <T, A> resultLiveData(
+
+        dbQuery: () -> LiveData<T>,
+        networkCall: suspend () -> Result<A>,
+        saveCallResult: suspend (A) -> Unit
+    ): LiveData<Result<T>> = liveData(Dispatchers.IO) {
+        emit(Result.loading<T>())
+        val source = dbQuery.invoke().map { Result.success(it) }
     }
-
-    suspend fun insert(user: UserData) {
-        userDao.insertUser(user)
-    }
-
-    private suspend fun insertAllUsers(userList: List<UserData>?) {
-        if (userList != null && userList.isNotEmpty()) {
-            userDao.insertAllUsers(userList)
-        }
-    }
-
-    suspend fun getUserList(): LiveData<List<UserData>> {
-        val userListFromRemote = apiService.getUserData().body()
-        withContext(Dispatchers.IO) {
-            insertAllUsers(userListFromRemote)
-        }
-        return userDao.getAllUsers()
-    }
-
 }

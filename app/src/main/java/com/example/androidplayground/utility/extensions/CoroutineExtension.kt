@@ -10,6 +10,7 @@ fun <T> CoroutineScope.safeLaunch(job: suspend CoroutineScope.() -> T, errorCase
             job()
         }
     } catch (e: Exception) {
+
         errorCase()
     }
 }

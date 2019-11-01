@@ -17,7 +17,6 @@ import com.bumptech.glide.request.target.Target
 import com.example.androidplayground.R
 import kotlinx.android.synthetic.main.layout_user_list_item.view.*
 
-
 class UserListAdapter(private val context: Context, private var userList: List<UserData>) :
     RecyclerView.Adapter<UserListAdapter.UserListViewHolder>() {
 
@@ -43,7 +42,6 @@ class UserListAdapter(private val context: Context, private var userList: List<U
         private val title: TextView = view.findViewById(R.id.tv_title)
         private val type: TextView = view.findViewById(R.id.tv_type)
         private val avatar: ImageView = view.findViewById(R.id.iv_avatar)
-
 
         fun bindData(position: Int) {
             title.text = userList[position].userName
@@ -74,7 +72,6 @@ class UserListAdapter(private val context: Context, private var userList: List<U
                         view.progressBar.visibility = View.GONE
                         return false
                     }
-
                 }).into(avatar)
 
             ViewCompat.setTransitionName(avatar, userList[position].userName)
@@ -83,6 +80,5 @@ class UserListAdapter(private val context: Context, private var userList: List<U
                 (context as UsersActivity).onUserAvatarClicked(userList[position], it, position)
             }
         }
-
     }
 }

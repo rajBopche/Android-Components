@@ -7,7 +7,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
 object ApiClient {
 
     private var apiService: RestService? = null
@@ -37,11 +36,9 @@ object ApiClient {
                 build()
             }
 
-
             apiService = retrofit.create(RestService::class.java)
         }
 
         return apiService!!
     }
-
 }

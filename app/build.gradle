@@ -33,6 +33,10 @@ android {
         enabled = true
     }
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
 }
 
 dependencies {
@@ -65,8 +69,8 @@ dependencies {
 
     // LiveData and ViewModel
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-beta01'
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-rc01'
     
 
     // Retrofit and Gson
