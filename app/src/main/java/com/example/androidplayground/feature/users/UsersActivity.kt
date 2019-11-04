@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.androidplayground.AddUserActivity
 import com.example.androidplayground.R
 import com.example.androidplayground.feature.UserViewModel
 import com.example.androidplayground.utility.Constants
@@ -107,16 +108,29 @@ class UsersActivity : AppCompatActivity() {
 
     fun onAddButtonClicked(view: View) {
         if (view is FloatingActionButton) {
-            showToast("Sorry, Not implemented")
+            val intent = Intent(this, AddUserActivity::class.java)
+            startActivityForResult(intent, Constants.USER_LIST_TO_ADD_USER_REQUEST)
         }
     }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == Constants.USER_LIST_TO_DETAILS_REQUEST && resultCode == Activity.RESULT_OK) {
-            userDataList.removeAt(clickedItemPosition)
-            userAdapter?.updateAdapter(userDataList)
+
+        when {
+            requestCode == Constants.USER_LIST_TO_DETAILS_REQUEST && resultCode == Activity.RESULT_OK -> {
+                userDataList.removeAt(clickedItemPosition)
+                userAdapter?.updateAdapter(userDataList)
+            }
+
+            requestCode == Constants.USER_LIST_TO_ADD_USER_REQUEST && resultCode == Activity.RESULT_OK -> {
+                val newUser = UserData(
+                    userName = data?.getStringExtra(Constants.EXTRA_USER_NAME) ?: "Unknown",
+                    type = data?.getStringExtra(Constants.EXTRA_USER_TYPE) ?: "Unknown"
+                )
+                userDataList.add(newUser)
+                userAdapter?.updateAdapter(userDataList)
+            }
         }
     }
 

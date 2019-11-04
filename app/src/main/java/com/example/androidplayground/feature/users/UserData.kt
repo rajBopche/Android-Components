@@ -11,7 +11,7 @@ data class UserData(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "ID")
-    val userId: Int,
+    val userId: Int = -1,
 
     @SerializedName("login")
     @ColumnInfo(name = "NAME")
@@ -23,5 +23,5 @@ data class UserData(
 
     @SerializedName("avatar_url")
     @ColumnInfo(name = "AVATAR_URL")
-    val avatarUrl: String
+    val avatarUrl: String = ""
 ) : Serializable
