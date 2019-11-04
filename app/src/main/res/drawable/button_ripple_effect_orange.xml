@@ -9,5 +9,5 @@
         </shape>
     </item>
 
-    <item android:drawable="@drawable/circular_rectangle" />
+    <item android:drawable="@drawable/circular_rectangle_orange" />
 </ripple>

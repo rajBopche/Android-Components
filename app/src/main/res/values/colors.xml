@@ -9,5 +9,7 @@
     <color name="colorDarkOrange">#FF6347</color>
     <color name="colorDarkRed">#FF0000</color>
     <color name="colorLiteGray">#B7B7B7</color>
+    <color name="colorBlue">#0072C6</color>
+    <color name="colorGreen">#50C878</color>
 
 </resources>

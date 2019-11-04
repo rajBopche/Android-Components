@@ -39,7 +39,7 @@
             android:layout_marginTop="60dp"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
-            android:background="@drawable/button_ripple_effect"
+            android:background="@drawable/button_ripple_effect_orange"
             android:clickable="true"
             android:focusable="true"
             android:text="@string/delete"

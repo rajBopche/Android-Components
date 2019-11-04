@@ -12,8 +12,9 @@
             android:roundIcon="@mipmap/ic_place_holder"
             android:supportsRtl="false"
             android:theme="@style/AppTheme.NoActionBar">
-        <activity
-                android:name=".feature.SplashScreenActivity">
+        <activity android:name=".AddUserActivity">
+        </activity>
+        <activity android:name=".feature.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -22,7 +23,6 @@
         </activity>
         <activity android:name=".feature.users.UsersActivity"/>
         <activity android:name=".feature.users.DetailsActivity"/>
-
     </application>
 
 </manifest>
