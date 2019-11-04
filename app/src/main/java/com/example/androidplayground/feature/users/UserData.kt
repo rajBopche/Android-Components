@@ -11,7 +11,7 @@ data class UserData(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "ID")
-    val userId: Int = -1,
+    val userId: Int,
 
     @SerializedName("login")
     @ColumnInfo(name = "NAME")

@@ -36,5 +36,4 @@ class UserRepository(context: Context) {
         }
         return userList!!
     }
-
 }

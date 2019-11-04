@@ -29,11 +29,9 @@ object ApiClient {
                 build()
             }
 
-
             apiService = retrofit.create(RestService::class.java)
         }
 
         return apiService!!
     }
-
 }

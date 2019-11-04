@@ -14,5 +14,4 @@ fun safeLaunch(
     } catch (t: Throwable) {
         t.printStackTrace()
     }
-
 }

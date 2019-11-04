@@ -8,6 +8,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.androidplayground.utility.Constants
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_add_user.*
 
 class AddUserActivity : AppCompatActivity() {
@@ -21,20 +22,28 @@ class AddUserActivity : AppCompatActivity() {
         if (view is Button) {
             val userName = edt_user_name.text.toString()
             val userType = edt_user_type.text.toString()
-            if (userName.isBlank()) {
-                edt_user_name.setError("Required", ContextCompat.getDrawable(this, R.drawable.ic_error))
-                return
+
+            if (userName.isNotBlank() && userType.isNotBlank()) {
+                val intent = Intent().apply {
+                    putExtra(Constants.EXTRA_USER_NAME, userName)
+                    putExtra(Constants.EXTRA_USER_TYPE, userType)
+                }
+
+                setResult(Activity.RESULT_OK, intent)
+                finish()
+            } else {
+                showSnackBar("Details Cannot Be Empty")
             }
-            if (userType.isBlank()) {
-                edt_user_type.setError("Required", ContextCompat.getDrawable(this, R.drawable.ic_error))
-                return
-            }
-            val intent = Intent().apply {
-                putExtra(Constants.EXTRA_USER_NAME, userName)
-                putExtra(Constants.EXTRA_USER_TYPE, userType)
-            }
-            setResult(Activity.RESULT_OK, intent)
-            finish()
         }
+    }
+
+    private fun showSnackBar(message: String) {
+        Snackbar
+            .make(cl_add_user_container, message, Snackbar.LENGTH_LONG)
+            .setTextColor(ContextCompat.getColor(this, R.color.colorWhite))
+            .setAction("DISMISS") {
+                // dismiss
+            }
+            .show()
     }
 }

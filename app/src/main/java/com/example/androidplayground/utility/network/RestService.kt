@@ -9,5 +9,4 @@ interface RestService {
 
     @GET
     suspend fun getUserData(@Url url: String = "https://api.github.com/users"): Response<List<UserData>>
-
 }

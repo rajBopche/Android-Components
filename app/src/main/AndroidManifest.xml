@@ -12,17 +12,17 @@
             android:roundIcon="@mipmap/ic_place_holder"
             android:supportsRtl="false"
             android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".AddUserActivity">
+        <activity android:name=".AddUserActivity" android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".feature.SplashScreenActivity">
+        <activity android:name=".feature.SplashScreenActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".feature.users.UsersActivity"/>
-        <activity android:name=".feature.users.DetailsActivity"/>
+        <activity android:name=".feature.users.UsersActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".feature.users.UserDetailsActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

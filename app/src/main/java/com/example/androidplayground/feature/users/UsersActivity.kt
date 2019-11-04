@@ -19,7 +19,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_users.*
 
-
 class UsersActivity : AppCompatActivity() {
 
     private lateinit var userViewModel: UserViewModel
@@ -55,7 +54,6 @@ class UsersActivity : AppCompatActivity() {
         })
     }
 
-
     private fun getloadingStatus() {
         userViewModel.getLoadingStatus().observe(this, Observer {
             when (it) {
@@ -76,7 +74,7 @@ class UsersActivity : AppCompatActivity() {
     private fun showSnackBar(message: String) {
         Snackbar
             .make(cl_container, message, Snackbar.LENGTH_INDEFINITE)
-            .setTextColor(ContextCompat.getColor(this, R.color.colorDarkRed))
+            .setTextColor(ContextCompat.getColor(this, R.color.colorWhite))
             .setAction("RETRY") {
                 userViewModel.getData()
             }
@@ -89,7 +87,7 @@ class UsersActivity : AppCompatActivity() {
         position: Int
     ) {
         clickedItemPosition = position
-        val intent = Intent(this, DetailsActivity::class.java).apply {
+        val intent = Intent(this, UserDetailsActivity::class.java).apply {
             putExtra(Constants.EXTRA_USER_DATA, userData)
             putExtra(
                 Constants.EXTRA_USER_DATA_IMAGE_TRANSITION_NAME,
@@ -113,7 +111,6 @@ class UsersActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -126,7 +123,8 @@ class UsersActivity : AppCompatActivity() {
             requestCode == Constants.USER_LIST_TO_ADD_USER_REQUEST && resultCode == Activity.RESULT_OK -> {
                 val newUser = UserData(
                     userName = data?.getStringExtra(Constants.EXTRA_USER_NAME) ?: "Unknown",
-                    type = data?.getStringExtra(Constants.EXTRA_USER_TYPE) ?: "Unknown"
+                    type = data?.getStringExtra(Constants.EXTRA_USER_TYPE) ?: "Unknown",
+                    userId = (100..999).random()
                 )
                 userDataList.add(newUser)
                 userAdapter?.updateAdapter(userDataList)
@@ -137,5 +135,4 @@ class UsersActivity : AppCompatActivity() {
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
-
 }

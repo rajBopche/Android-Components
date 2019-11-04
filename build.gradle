@@ -21,6 +21,12 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+
+
+}
+
+plugins {
+    id "org.jlleitschuh.gradle.ktlint" version "7.1.0"
 }
 
 allprojects {
@@ -29,6 +35,7 @@ allprojects {
         jcenter()
 
     }
+    apply plugin: "org.jlleitschuh.gradle.ktlint"
 }
 
 task clean(type: Delete) {

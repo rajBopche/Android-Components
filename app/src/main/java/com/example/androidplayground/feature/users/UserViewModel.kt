@@ -28,7 +28,6 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
                 loadStatus.postValue(Constants.STATUS_ERROR)
             }
         }
-
     }
 
     fun insertUser(user: UserData) {
@@ -47,5 +46,4 @@ class UserViewModel(app: Application) : AndroidViewModel(app) {
     fun getUserData(): LiveData<List<UserData>> = userList
 
     fun getLoadingStatus(): LiveData<Int> = loadStatus
-
 }
